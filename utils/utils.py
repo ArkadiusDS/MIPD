@@ -2,12 +2,9 @@
 Helper functions and labels in multi labels problems
 """
 import itertools
-import re
-
 import numpy as np
 import torch
-import pandas as pd
-from datasets import DatasetDict
+import yaml
 from transformers import EvalPrediction
 from sklearn.metrics import (
     classification_report, f1_score,
@@ -28,6 +25,12 @@ class DisinformationDataset(torch.utils.data.Dataset):
 
     def __len__(self):
         return len(self.labels)
+
+
+def load_config(file_path='config.yaml'):
+    """Load configuration from a YAML file."""
+    with open(file_path, 'r') as yaml_file:
+        return yaml.safe_load(yaml_file)
 
 
 def cartesian_product(hyperparameters):
@@ -56,9 +59,9 @@ def compute_metrics(pred: EvalPrediction):
     }
 
 
-def compute_metrics_for_test_data_binary(y_true, y_pred):
+def compute_metrics_for_test_data(y_true, y_pred):
 
-    clf_report = classification_report(y_true, y_pred,  output_dict=True)
+    clf_report = classification_report(y_true, y_pred, output_dict=True)
     f1 = f1_score(y_true=y_true, y_pred=y_pred)
     f1_micro_average = f1_score(y_true=y_true, y_pred=y_pred, average='micro')
     f1_macro_average = f1_score(y_true=y_true, y_pred=y_pred, average='macro')
@@ -77,3 +80,19 @@ def compute_metrics_for_test_data_binary(y_true, y_pred):
     }
 
     return metrics
+
+
+def predict_disinformation(text, tokenizer, model):
+    """
+    Function that predicts the label for input text using argmax
+    """
+
+    tokenized_text = tokenizer([text], truncation=True, padding=True, max_length=512, return_tensors="pt")
+    with torch.no_grad():
+        outputs = model(**tokenized_text)
+
+    logits = outputs.logits
+    probabilities = torch.sigmoid(logits).squeeze().cpu().numpy()
+
+    predicted_label = np.argmax(probabilities)
+    return predicted_label
