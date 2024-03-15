@@ -117,3 +117,48 @@ def predict_disinformation(text, tokenizer, model):
 
     predicted_label = np.argmax(probabilities)
     return predicted_label
+
+
+def multi_label_metrics(predictions, labels, target_names, threshold=0.15):
+    """
+    Function with last layer for multilabel classification and computing metrics
+    """
+    # first, apply sigmoid on predictions which are of shape (batch_size, num_labels)
+    sigmoid = torch.nn.Sigmoid()
+    probs = sigmoid(torch.Tensor(predictions))
+    # next, use threshold to turn them into integer predictions
+    y_pred = np.zeros(probs.shape)
+    y_pred[np.where(probs >= threshold)] = 1
+    # finally, compute metrics
+    y_true = labels
+    clf_report = classification_report(y_true, y_pred, target_names=target_names, output_dict=True)
+    f1_micro_average = f1_score(y_true=y_true, y_pred=y_pred, average='micro')
+    f1_macro_average = f1_score(y_true=y_true, y_pred=y_pred, average='macro')
+    f1_macro_weighted = f1_score(y_true=y_true, y_pred=y_pred, average='weighted')
+    roc_auc = roc_auc_score(y_true, y_pred, average='micro')
+    accuracy = accuracy_score(y_true, y_pred)
+    # return as dictionary
+    metrics = {'f1_micro': f1_micro_average,
+               'f1_macro': f1_macro_average,
+               'f1_macro_weighted': f1_macro_weighted,
+               'roc_auc': roc_auc,
+               'accuracy': accuracy,
+               'classification_report': clf_report}
+    return metrics
+
+
+config = load_config()
+LABELS_INTENTION = config["intention"]["data"]["labels"]
+
+
+def compute_metrics_intention(p: EvalPrediction):
+    """
+    Function for computing metrics
+    """
+    preds = p.predictions[0] if isinstance(p.predictions,
+                                           tuple) else p.predictions
+    result = multi_label_metrics(
+        predictions=preds,
+        target_names=LABELS_INTENTION,
+        labels=p.label_ids)
+    return result
