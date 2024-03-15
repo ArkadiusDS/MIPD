@@ -27,6 +27,27 @@ class DisinformationDataset(torch.utils.data.Dataset):
         return len(self.labels)
 
 
+def preprocess_data(examples, tokenizer, labels, padding, truncation, max_length):
+    """
+    Tokenizing and preprocessing data for model training
+    """
+    # take a batch of texts
+    text = examples["article"]
+    # encode them
+    encoding = tokenizer(text, padding=padding, truncation=truncation, max_length=max_length, return_tensors="pt")
+    # add labels
+    labels_batch = {k: examples[k] for k in examples.keys() if k in labels}
+    # create numpy array of shape (batch_size, num_labels)
+    labels_matrix = np.zeros((len(text), len(labels)))
+    # fill numpy array
+    for idx, label in enumerate(labels):
+        labels_matrix[:, idx] = labels_batch[label]
+
+    encoding["labels"] = labels_matrix.tolist()
+
+    return encoding
+
+
 def load_config(file_path='config.yaml'):
     """Load configuration from a YAML file."""
     with open(file_path, 'r') as yaml_file:
