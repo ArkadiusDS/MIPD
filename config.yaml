@@ -1,0 +1,276 @@
+disinformation:
+  data:
+    train: data/disinformation/train.csv
+    validation: data/disinformation/validation.csv
+    test: data/disinformation/test.csv
+  tokenizer:
+    truncation: True
+    padding: True
+    max_length: 512
+  models:
+      - model: allegro/herbert-base-cased
+        output: output/training/dis_pl_hb
+        valid_metrics: metrics/disinformation/herbert_base/valid/dis_pl_hb
+        path_to_save_model: output/final/dis_pl_hb
+        test_metrics: metrics/disinformation/herbert_base/test/dis_pl_hb
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00003
+          weight_decay: 0.1
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: allegro/herbert-large-cased
+        output: output/training/dis_pl_hl
+        valid_metrics: metrics/disinformation/herbert_large/valid/dis_pl_hl
+        path_to_save_model: output/final/dis_pl_hl
+        test_metrics: metrics/disinformation/herbert_large/test/dis_pl_hl
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.03
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: sdadas/polish-roberta-base-v2
+        output: output/training/dis_pl_prb
+        valid_metrics: metrics/disinformation/polish_roberta_base/valid/dis_pl_prb
+        path_to_save_model: output/final/dis_pl_prb
+        test_metrics: metrics/disinformation/polish_roberta_base/test/dis_pl_prb
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00002
+          weight_decay: 0.2
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: sdadas/polish-roberta-large-v2
+        output: output/training/dis_pl_prl
+        valid_metrics: metrics/disinformation/polish_roberta_large/valid/dis_pl_prl
+        path_to_save_model: output/final/dis_pl_prl
+        test_metrics: metrics/disinformation/polish_roberta_large/test/dis_pl_prl
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.02
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+intention:
+  data:
+    train: data/intention/train.csv
+    validation: data/intention/validation.csv
+    test: data/intention/test.csv
+    labels: ['NEGATING_SCIENTIFIC_FACTS', 'UNDERMINING_THE_CREDIBILITY_OF_PUBLIC_INSTITUTIONS',
+             'CHALLENGING_AN_INTERNATIONAL_ORGANISATION', 'PROMOTING_STEREOTYPES',
+             'WEAKENING_INTERNATIONAL_ALLIANCES', 'UNDERMINING_INTERNATIONAL_COUNTRY_POSITION',
+             'CHANGE_OF_ELECTION_BELIEFS', 'RAISING_MORALE_OF_ONE_SIDE_OF_CONFLICT', 'CAUSE_PANIC']
+  tokenizer:
+    truncation: True
+    padding: True
+    max_length: 512
+  models:
+      - model: allegro/herbert-base-cased
+        output: output/training/int_pl_hb
+        valid_metrics: metrics/intention/herbert_base/valid/int_pl_hb
+        path_to_save_model: output/final/int_pl_hb
+        test_metrics: metrics/intention/herbert_base/test/int_pl_hb
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.2
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: allegro/herbert-large-cased
+        output: output/training/int_pl_hl
+        valid_metrics: metrics/intention/herbert_large/valid/int_pl_hl
+        path_to_save_model: output/final/int_pl_hl
+        test_metrics: metrics/intention/herbert_large/test/int_pl_hl
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.03
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: sdadas/polish-roberta-base-v2
+        output: output/training/int_pl_prb
+        valid_metrics: metrics/intention/polish_roberta_base/valid/int_pl_prb
+        path_to_save_model: output/final/int_pl_prb
+        test_metrics: metrics/intention/polish_roberta_base/test/int_pl_prb
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00003
+          weight_decay: 0.03
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: sdadas/polish-roberta-large-v2
+        output: output/training/int_pl_prl
+        valid_metrics: metrics/intention/polish_roberta_large/valid/int_pl_prl
+        path_to_save_model: output/final/int_pl_prl
+        test_metrics: metrics/intention/polish_roberta_large/test/int_pl_prl
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00002
+          weight_decay: 0.1
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+manipulation:
+  data:
+    train: data/manipulation/train.csv
+    validation: data/manipulation/validation.csv
+    test: data/manipulation/test.csv
+    labels: ['REFERENCE_ERROR', 'WHATABOUTISM', 'STRAWMAN', 'EMOTIONAL_CONTENT', 'CHERRY_PICKING', 'FALSE_CAUSE',
+             'MISLEADING_CLICKBAI', 'ANECDOTE', 'LEADING_QUESTIONS', 'EXAGGERATION', 'QUOTE_MINING']
+  tokenizer:
+    truncation: True
+    padding: True
+    max_length: 512
+  models:
+      - model: allegro/herbert-base-cased
+        output: output/training/man_pl_hb
+        valid_metrics: metrics/manipulation/herbert_base/valid/man_pl_hb
+        path_to_save_model: output/final/man_pl_hb
+        test_metrics: metrics/manipulation/herbert_base/test/man_pl_hb
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.03
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: allegro/herbert-large-cased
+        output: output/training/man_pl_hl
+        valid_metrics: metrics/manipulation/herbert_large/valid/man_pl_hl
+        path_to_save_model: output/final/man_pl_hl
+        test_metrics: metrics/manipulation/herbert_large/test/man_pl_hl
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.02
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: sdadas/polish-roberta-base-v2
+        output: output/training/man_pl_prb
+        valid_metrics: metrics/manipulation/polish_roberta_base/valid/man_pl_prb
+        path_to_save_model: output/final/man_pl_prb
+        test_metrics: metrics/manipulation/polish_roberta_base/test/man_pl_prb
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00001
+          weight_decay: 0.1
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
+      - model: sdadas/polish-roberta-large-v2
+        output: output/training/man_pl_prl
+        valid_metrics: metrics/manipulation/polish_roberta_large/valid/man_pl_prl
+        path_to_save_model: output/final/man_pl_prl
+        test_metrics: metrics/manipulation/polish_roberta_large/test/man_pl_prl
+        hyperparameters:
+          evaluation_strategy: steps
+          per_device_train_batch_size: 16
+          per_device_eval_batch_size: 16
+          num_train_epochs: 5
+          warmup_steps: 200
+          learning_rate: 0.00002
+          weight_decay: 0.01
+          fp16: True
+          metric_for_best_model: f1_macro_weighted
+          load_best_model_at_end: True
+          save_total_limit: 2
+          greater_is_better: True
+          save_strategy: steps
+          eval_steps: 500
