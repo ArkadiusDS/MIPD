@@ -2,6 +2,8 @@
 Helper functions and labels in multi labels problems
 """
 import itertools
+import re
+import pandas as pd
 import numpy as np
 import torch
 import yaml
@@ -81,7 +83,6 @@ def compute_metrics(pred: EvalPrediction):
 
 
 def compute_metrics_for_test_data(y_true, y_pred):
-
     clf_report = classification_report(y_true, y_pred, output_dict=True)
     f1 = f1_score(y_true=y_true, y_pred=y_pred)
     f1_micro_average = f1_score(y_true=y_true, y_pred=y_pred, average='micro')
@@ -160,5 +161,95 @@ def compute_metrics_intention(p: EvalPrediction):
     result = multi_label_metrics(
         predictions=preds,
         target_names=LABELS_INTENTION,
+        labels=p.label_ids)
+    return result
+
+
+# Function to extract unique strings using regular expressions
+def extract_unique_strings(string):
+    # Use regular expression to find all strings within curly braces
+    matches = re.findall(r'\b\w+\b', string)
+    return list(matches)
+
+
+def get_labels_names(df, labels_col_name):
+    """
+    Retrieves a list of unique labels from the dataset.
+
+    Parameters:
+    - df (pandas.DataFrame): The dataset.
+    - labels_col_name (str): Name of the column containing labels.
+
+    Returns:
+    - all_labels_list (list): A list of unique labels.
+    """
+    df_copy = df.copy()
+    df_copy[labels_col_name].fillna('[]', inplace=True)
+    try:
+        # Convert string representations of lists to actual lists
+        df_copy[labels_col_name] = df_copy[labels_col_name].apply(eval)
+    except TypeError:
+        pass
+    all_labels = df_copy.explode(labels_col_name)[labels_col_name].unique()
+    all_labels_list = [elem for elem in all_labels if not pd.isna(elem)]
+
+    return all_labels_list
+
+
+def labels_one_hot_encoding(df, labels_col_name):
+    """
+    Encodes labels into one-hot format and removes non-relevant feature from the dataset.
+
+    Parameters:
+    - df (pandas.DataFrame): The dataset.
+    - labels_col_name (str): Name of the column containing labels.
+
+    Returns:
+    - df_copy (pandas.DataFrame): The modified dataset with labels one-hot encoded and non-relevant features dropped.
+    """
+    df_copy = df.copy()
+    df_copy[labels_col_name].fillna('[]', inplace=True)
+    all_labels_list = get_labels_names(df_copy, labels_col_name)
+
+    for label in all_labels_list:
+        df_copy[label] = df_copy[labels_col_name].apply(lambda x: True if label in x else False)
+
+    df_copy.drop([labels_col_name], axis=1, inplace=True)
+
+    return df_copy
+
+
+def compute_metrics_for_test_data_int(y_true, y_pred, target_names):
+    clf_report = classification_report(y_true, y_pred, target_names=target_names, output_dict=True)
+    # f1 = f1_score(y_true=y_true, y_pred=y_pred)
+    f1_micro_average = f1_score(y_true=y_true, y_pred=y_pred, average='micro')
+    f1_macro_average = f1_score(y_true=y_true, y_pred=y_pred, average='macro')
+    f1_macro_weighted = f1_score(y_true=y_true, y_pred=y_pred, average='weighted')
+    roc_auc = roc_auc_score(y_true, y_pred, average='micro')
+    accuracy = accuracy_score(y_true, y_pred)
+    # return as dictionary
+    metrics = {
+        'f1_micro': f1_micro_average,
+        'f1_macro': f1_macro_average,
+        'f1_macro_weighted': f1_macro_weighted,
+        'accuracy': accuracy,
+        'classification_report': clf_report
+    }
+
+    return metrics
+
+
+LABELS_MANIPULATION = config["manipulation"]["data"]["labels"]
+
+
+def compute_metrics_manipulation(p: EvalPrediction):
+    """
+    Function for computing metrics
+    """
+    preds = p.predictions[0] if isinstance(p.predictions,
+                                           tuple) else p.predictions
+    result = multi_label_metrics(
+        predictions=preds,
+        target_names=LABELS_MANIPULATION,
         labels=p.label_ids)
     return result
