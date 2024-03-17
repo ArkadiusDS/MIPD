@@ -8,8 +8,10 @@ from datasets import Dataset, DatasetDict
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
 
 from utils.custom_callbacks import SaveMetricsCallback
-from utils.utils import load_config, preprocess_data, compute_metrics_intention, extract_unique_strings, \
+from utils.utils import (
+    load_config, preprocess_data, compute_metrics_intention, extract_unique_strings,
     labels_one_hot_encoding, compute_metrics_for_test_data_int
+)
 
 if __name__ == '__main__':
 
@@ -30,8 +32,8 @@ if __name__ == '__main__':
     id2label = {idx: label for idx, label in enumerate(LABELS_INTENTION)}
     label2id = {label: idx for idx, label in enumerate(LABELS_INTENTION)}
 
-    for seed in [128, 256, 512, 1024, 2048]:
-        for experiment in config["intention"]["models"]:
+    for experiment in config["intention"]["models"]:
+        for seed in [128, 256, 512, 1024, 2048]:
             transformers.set_seed(seed=seed)
             tokenizer = AutoTokenizer.from_pretrained(experiment["model"])
             encoded_dataset = dataset.map(
@@ -101,7 +103,7 @@ if __name__ == '__main__':
                 """
                 Function that predicts labels for development dataset
                 """
-                encoding = tokenizer(text, return_tensors="pt", truncation=True, max_length=256, padding="max_length")
+                encoding = tokenizer(text, return_tensors="pt", truncation=True, max_length=512, padding="max_length")
                 encoding = {k: v.to(model.device) for k, v in encoding.items()}
 
                 outputs = model(**encoding)
