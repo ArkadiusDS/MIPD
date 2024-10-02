@@ -75,11 +75,12 @@ Two basic statistics about full dataset:
 The articles were gathered from more than **400 publicly available sources**, including government-managed sites, alternative media, and websites containing conspiracy theories and propaganda. This diverse range of sources ensures the dataset reflects a broad spectrum of perspectives and content.
 
 ## Usage
-The MIPD dataset can be used to:
+The MIPD dataset can be used to, e.g.:
 
 - Study disinformation patterns.
-- Analyze the techniques and narratives used in manipulating public opinion.
-- Train machine learning models for detecting disinformation.
+- Analyze the manipulation techniques used in disinformative content.
+- Analyze disinformation per different thematic category
+
 
 ## License
 The MIPD dataset is made available under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0).
