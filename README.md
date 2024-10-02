@@ -105,4 +105,4 @@ The MIPD dataset can be used to, e.g.:
 
 ## License
 The MIPD dataset is made available under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0).
-For full details, please refer to the [LICENSE](https://github.com/ArkadiusDS/MIPD/blob/master/LICENSE-CC-BY-NC-ND-4.0.md).
+For full details, please refer to the [LICENSE](https://github.com/ArkadiusDS/MIPD/blob/master/LICENSE).
