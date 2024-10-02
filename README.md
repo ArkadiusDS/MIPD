@@ -59,6 +59,26 @@ Each article is classified into one of ten thematic categories based on its cont
 
 These categories help structure the data and allow for targeted analysis of disinformation on different subjects.
 
+## Data Directory Details
+
+data
+│──── articles_categories.csv       # CSV file containing article IDs and their corresponding thematic categories
+│──── raw_articles.csv              # CSV file with raw full articles and article IDs
+│──── list_of_sources.txt           # List of sources from which the articles were gathered
+│──── disinformation/               # Directory containing data related to disinformation classification
+│    │    ├── train/                # Training data for disinformation classification
+│    │    ├── validation/           # Validation data for disinformation classification
+│    │    └── test/                 # Test data for disinformation classification
+│──── manipulation/                 # Directory containing data related to manipulation techniques
+│    │    ├── train/                # Training data for manipulation techniques
+│    │    ├── validation/           # Validation data for manipulation techniques
+│    │    └── test/                 # Test data for manipulation techniques
+│──── intention/                    # Directory containing data related to intentions behind disinformation
+│    │    ├── train/                # Training data for intention classification
+│    │    ├── validation/           # Validation data for intention classification
+│    │    └── test/                 # Test data for intention classification
+
+
 ## Annotation Methodology
 The dataset was annotated by a team of five Polish debunking and/or fact-checking experts, each with at least three years of experience. The process involved several steps to ensure high-quality annotations:
 
