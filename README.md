@@ -95,6 +95,10 @@ Two basic statistics about full dataset:
 ## Sources
 The articles were gathered from more than **400 publicly available sources**, including government-managed sites, alternative media, and websites containing conspiracy theories and propaganda. This diverse range of sources ensures the dataset reflects a broad spectrum of perspectives and content.
 
+## Fine-tuned models
+
+All final fine-tuned models used in our experiments described in paper could be fined under this [LINK](https://huggingface.co/collections/ArkadiusDS/mipd-66fc4b424fb09ea1666be6e7)
+
 ## Usage
 The MIPD dataset can be used to, e.g.:
 
