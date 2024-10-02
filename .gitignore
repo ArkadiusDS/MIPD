@@ -11,6 +11,8 @@ metrics/
 output/
 .ipynb_checkpoints/
 
+*.DS_Store
+
 # Distribution / packaging
 .Python
 build/
