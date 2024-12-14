@@ -2,6 +2,7 @@
 
 ### Official Code and Data repository of our paper from EMNLP 2024 Main Conference in Miami
 
+#### Authors: [Arkadiusz Modzelewski](www.amodzelewski.com), Giovanni Da San Martino, Pavel Savov, Magdalena Anna Wilczyńska, Adam Wierzbicki
 #### Paper Title: **MIPD: Exploring Manipulations and Intentions In a Novel Corpus of Polish Disinformation**
 
 #### Link to the paper: [ACL Anthology](https://aclanthology.org/2024.emnlp-main.1103/)
