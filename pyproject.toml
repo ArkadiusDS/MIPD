@@ -1,0 +1,18 @@
+[project]
+name = "mipd"
+version = "0.1.0"
+description = """Projects with scripts for fine-tuning models on MIPD dataset.
+                 All models and results are described in the EMNLP2024 Main Conference Paper:
+                 MIPD: Exploring Manipulation and Intention In a Novel Corpus of Polish Disinformation
+              """
+readme = "README.md"
+requires-python = "==3.12.7"
+dependencies = [
+    "datasets==3.2.0",
+    "numpy==2.2.0",
+    "pandas==2.2.3",
+    "protobuf==5.29.1",
+    "sacremoses==0.1.1",
+    "scikit-learn==1.6.0",
+    "transformers[torch]==4.47.0",
+]
