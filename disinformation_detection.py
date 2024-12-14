@@ -91,6 +91,7 @@ if __name__ == '__main__':
             evaluation_results = compute_metrics_for_test_data(test_data.disinformation, test_data["predictions"])
             # Save evaluation metrics to a JSON file
             output_file_path = experiment["test_metrics"] + str(seed) + ".json"
-
+            # Ensure the directory exists before saving
+            os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
             with open(output_file_path, 'w') as output_file:
                 json.dump(evaluation_results, output_file, indent=4)
