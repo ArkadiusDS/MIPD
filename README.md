@@ -1,6 +1,10 @@
 # MIPD Dataset
 
-Official Code and Data repository of our paper **MIPD: Exploring Manipulations and Intentions In a Novel Corpus of Polish Disinformation**
+### Official Code and Data repository of our paper from EMNLP 2024 Main Conference in Miami
+
+#### Paper Title: **MIPD: Exploring Manipulations and Intentions In a Novel Corpus of Polish Disinformation**
+
+#### Link to the paper: [ACL Anthology](https://aclanthology.org/2024.emnlp-main.1103/)
 
 ## Overview
 The **MIPD Dataset** is a novel collection of **15,356 Polish web articles**, annotated with four key labels: whether the article is disinformation, intention types, manipulation techniques, and thematic categories. The dataset was curated by a team of professional fact-checkers and debunkers using a detailed methodology to identify and categorize disinformation. This dataset is designed for research into disinformation, its patterns, and the methods used to manipulate information in online media.
