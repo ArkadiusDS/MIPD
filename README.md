@@ -8,6 +8,18 @@ Paper Title: **MIPD: Exploring Manipulations and Intentions In a Novel Corpus of
 
 #### Link to the paper: [ACL Anthology](https://aclanthology.org/2024.emnlp-main.1103/)
 
+#### Citation
+If you use this work, please cite our paper:
+```bibtex
+@inproceedings{modzelewski2024mipd,
+  title={MIPD: Exploring Manipulation and Intention In a Novel Corpus of Polish Disinformation},
+  author={Modzelewski, Arkadiusz and Da San Martino, Giovanni and Savov, Pavel and Wilczy{\'n}ska, Magdalena and Wierzbicki, Adam},
+  booktitle={Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages={19769--19785},
+  year={2024}
+}
+```
+
 ## Overview
 The **MIPD Dataset** is a novel collection of **15,356 Polish web articles**, annotated with four key labels: whether the article is disinformation, intention types, manipulation techniques, and thematic categories. The dataset was curated by a team of professional fact-checkers and debunkers using a detailed methodology to identify and categorize disinformation. This dataset is designed for research into disinformation, its patterns, and the methods used to manipulate information in online media.
 
