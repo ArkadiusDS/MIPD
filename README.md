@@ -11,12 +11,23 @@ Paper Title: **MIPD: Exploring Manipulations and Intentions In a Novel Corpus of
 #### Citation
 If you use this work, please cite our paper:
 ```bibtex
-@inproceedings{modzelewski2024mipd,
-  title={MIPD: Exploring Manipulation and Intention In a Novel Corpus of Polish Disinformation},
-  author={Modzelewski, Arkadiusz and Da San Martino, Giovanni and Savov, Pavel and Wilczy{\'n}ska, Magdalena and Wierzbicki, Adam},
-  booktitle={Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
-  pages={19769--19785},
-  year={2024}
+@inproceedings{modzelewski-etal-2024-mipd,
+    title = "{MIPD}: Exploring Manipulation and Intention In a Novel Corpus of {P}olish Disinformation",
+    author = "Modzelewski, Arkadiusz  and
+      Da San Martino, Giovanni  and
+      Savov, Pavel  and
+      Wilczy{\'n}ska, Magdalena Anna  and
+      Wierzbicki, Adam",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.1103/",
+    doi = "10.18653/v1/2024.emnlp-main.1103"
 }
 ```
 
